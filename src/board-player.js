@@ -3,8 +3,6 @@ import { LitElement, html, css } from 'lit-element'
 import '@material/mwc-fab/mwc-fab'
 import '@material/mwc-icon/mwc-icon'
 
-import 'web-animations-js'
-
 import './board-wrapper'
 
 import './player/board-player-carousel'
@@ -57,88 +55,70 @@ class BoardPlayer extends LitElement {
         @transform=${e => this._onTransform(e)}
         tabindex="-1"
       >
-        ${
-          this.started
-            ? html`
-                ${
-                  this.transition == 'flip-card'
-                    ? html`
-                        <board-player-flipcard axis="y" .rows=${this.rows} .columns=${this.columns} player>
-                          ${
-                            this.boards.map(
-                              item => html`
-                                <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                                </board-wrapper>
-                              `
-                            )
-                          }
-                        </board-player-flipcard>
-                      `
-                    : html``
-                }
-                ${
-                  this.transition == 'flip-card2'
-                    ? html`
-                        <board-player-flipcard-edge axis="y" .rows=${this.rows} .columns=${this.columns} player>
-                          ${
-                            this.boards.map(
-                              item => html`
-                                <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                                </board-wrapper>
-                              `
-                            )
-                          }
-                        </board-player-flipcard-edge>
-                      `
-                    : html``
-                }
-                ${
-                  this.transition == 'carousel'
-                    ? html`
-                        <board-player-carousel
-                          axis="y"
-                          .rows=${this.rows}
-                          .columns=${this.columns}
-                          backface-visibility="false"
-                          player
-                        >
-                          ${
-                            this.boards.map(
-                              item => html`
-                                <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                                </board-wrapper>
-                              `
-                            )
-                          }
-                        </board-player-carousel>
-                      `
-                    : html``
-                }
-                ${
-                  this.transition == 'enlarge-grid'
-                    ? html`
-                        <board-player-enlarge-grid
-                          axis="y"
-                          .rows=${this.rows}
-                          .columns=${this.columns}
-                          backface-visibility="false"
-                          player
-                        >
-                          ${
-                            this.boards.map(
-                              item => html`
-                                <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                                </board-wrapper>
-                              `
-                            )
-                          }
-                        </board-player-enlarge-grid>
-                      `
-                    : html``
-                }
-              `
-            : html``
-        }
+        ${this.started
+          ? html`
+              ${this.transition == 'flip-card'
+                ? html`
+                    <board-player-flipcard axis="y" .rows=${this.rows} .columns=${this.columns} player>
+                      ${this.boards.map(
+                        item => html`
+                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
+                          </board-wrapper>
+                        `
+                      )}
+                    </board-player-flipcard>
+                  `
+                : html``}
+              ${this.transition == 'flip-card2'
+                ? html`
+                    <board-player-flipcard-edge axis="y" .rows=${this.rows} .columns=${this.columns} player>
+                      ${this.boards.map(
+                        item => html`
+                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
+                          </board-wrapper>
+                        `
+                      )}
+                    </board-player-flipcard-edge>
+                  `
+                : html``}
+              ${this.transition == 'carousel'
+                ? html`
+                    <board-player-carousel
+                      axis="y"
+                      .rows=${this.rows}
+                      .columns=${this.columns}
+                      backface-visibility="false"
+                      player
+                    >
+                      ${this.boards.map(
+                        item => html`
+                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
+                          </board-wrapper>
+                        `
+                      )}
+                    </board-player-carousel>
+                  `
+                : html``}
+              ${this.transition == 'enlarge-grid'
+                ? html`
+                    <board-player-enlarge-grid
+                      axis="y"
+                      .rows=${this.rows}
+                      .columns=${this.columns}
+                      backface-visibility="false"
+                      player
+                    >
+                      ${this.boards.map(
+                        item => html`
+                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
+                          </board-wrapper>
+                        `
+                      )}
+                    </board-player-enlarge-grid>
+                  `
+                : html``}
+            `
+          : html``}
       </slot>
 
       <mwc-fab
