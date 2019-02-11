@@ -50,7 +50,7 @@ class BoardPlayer extends LitElement {
     return html`
       <slot
         @keydown=${e => this._onKeydown(e)}
-        @tap=${e => this._onTap(e)}
+        @click=${e => this._onTap(e)}
         @mousemove=${e => this._onMousemove(e)}
         @transform=${e => this._onTransform(e)}
         tabindex="-1"
@@ -124,7 +124,7 @@ class BoardPlayer extends LitElement {
       <mwc-fab
         id="fab"
         @mouseover=${e => this._onMouseoverFab(e)}
-        @tap=${e => this._onTapFullscreen(e)}
+        @click=${e => this._onTapFullscreen(e)}
         icon="fullscreen"
         title="fullscreen"
       >
