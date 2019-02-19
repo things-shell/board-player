@@ -1,16 +1,14 @@
 {
   "name": "@things-shell/board-player",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "src/index.js",
-  "module": "dist/board-player.mjs",
-  "jsnext:main": "dist/board-player.mjs",
   "repository": "https://github.com/things-shell/board-player.git",
   "author": "Hearty Oh <heartyoh@hatiolab.com>",
   "license": "MIT",
   "scripts": {
     "serve": "webpack-dev-server --hot",
-    "build": "rollup -c",
-    "prepublish": "rollup -c"
+    "build": "webpack",
+    "prepublish": "webpack"
   },
   "dependencies": {
     "@hatiolab/things-scene": "^2.5.0",
