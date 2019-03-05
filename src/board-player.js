@@ -6,11 +6,6 @@ import '@material/mwc-icon/mwc-icon'
 import './board-wrapper'
 
 import './player/board-player-carousel'
-import './player/board-player-cube'
-import './player/board-player-flipcard'
-import './player/board-player-flipcard-edge'
-import './player/board-player-grid'
-import './player/board-player-enlarge-grid'
 
 import { togglefullscreen } from '@things-shell/client-utils'
 
@@ -22,7 +17,6 @@ class BoardPlayer extends LitElement {
 
     this.boards = []
 
-    this.transition = 'carousel'
     this.playtime = 30
     this.columns = 1
     this.rows = 1
@@ -34,7 +28,6 @@ class BoardPlayer extends LitElement {
     return {
       boards: Array,
 
-      transition: String,
       playtime: Number,
       columns: Number,
       rows: Number,
@@ -52,86 +45,60 @@ class BoardPlayer extends LitElement {
   render() {
     return html`
       <slot @mousemove=${e => this.onMousemove(e)} @transform=${e => this.onTransform(e)} tabindex="-1">
-        ${this.started
-          ? html`
-              ${this.transition == 'flip-card'
-                ? html`
-                    <board-player-flipcard axis="y" .rows=${this.rows} .columns=${this.columns} player>
-                      ${this.boards.map(
-                        item => html`
-                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                          </board-wrapper>
-                        `
-                      )}
-                    </board-player-flipcard>
-                  `
-                : html``}
-              ${this.transition == 'flip-card2'
-                ? html`
-                    <board-player-flipcard-edge axis="y" .rows=${this.rows} .columns=${this.columns} player>
-                      ${this.boards.map(
-                        item => html`
-                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                          </board-wrapper>
-                        `
-                      )}
-                    </board-player-flipcard-edge>
-                  `
-                : html``}
-              ${this.transition == 'carousel'
-                ? html`
-                    <board-player-carousel
-                      axis="y"
-                      .rows=${this.rows}
-                      .columns=${this.columns}
-                      backface-visibility="false"
-                      player
-                    >
-                      ${this.boards.map(
-                        item => html`
-                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                          </board-wrapper>
-                        `
-                      )}
-                    </board-player-carousel>
-                  `
-                : html``}
-              ${this.transition == 'enlarge-grid'
-                ? html`
-                    <board-player-enlarge-grid
-                      axis="y"
-                      .rows=${this.rows}
-                      .columns=${this.columns}
-                      backface-visibility="false"
-                      player
-                    >
-                      ${this.boards.map(
-                        item => html`
-                          <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}>
-                          </board-wrapper>
-                        `
-                      )}
-                    </board-player-enlarge-grid>
-                  `
-                : html``}
-            `
-          : html``}
+        ${
+          this.started
+            ? html`
+                <board-player-carousel
+                  axis="y"
+                  .rows=${this.rows}
+                  .columns=${this.columns}
+                  backface-visibility="false"
+                  player
+                >
+                  ${this.boards.map(
+                    item => html`
+                      <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}> </board-wrapper>
+                    `
+                  )}
+                </board-player-carousel>
+              `
+            : html``
+        }
       </slot>
 
       <div id="control" @mouseover=${e => this.onMouseoverControl(e)} hidden>
-        <mwc-icon id="up" @click=${e => this.onTapUp(e)}>keyboard_arrow_up</mwc-icon>
-        <mwc-icon id="left" @click=${e => this.onTapLeft(e)}>keyboard_arrow_left</mwc-icon>
-        <mwc-icon id="play" @click=${e => this.onTapPlay(e)} ?hidden=${this.playing}>play_arrow</mwc-icon>
-        <mwc-icon id="pause" @click=${e => this.onTapPause(e)} ?hidden=${!this.playing}>pause</mwc-icon>
-        <mwc-icon id="right" @click=${e => this.onTapRight(e)}>keyboard_arrow_right</mwc-icon>
-        <mwc-icon id="down" @click=${e => this.onTapDown(e)}>keyboard_arrow_down</mwc-icon>
-        <mwc-icon id="settings" @click=${e => this.onTapSettings(e)}>settings</mwc-icon>
-        <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
-          >fullscreen</mwc-icon
-        >
-        <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
-          >fullscreen_exit</mwc-icon
-        >
+        <div>
+          <mwc-icon id="up" @click=${e => this.onTapUp(e)}>keyboard_arrow_up</mwc-icon>
+          <mwc-icon id="left" @click=${e => this.onTapLeft(e)}>keyboard_arrow_left</mwc-icon>
+          <mwc-icon id="play" @click=${e => this.onTapPlay(e)} ?hidden=${this.playing}>play_arrow</mwc-icon>
+          <mwc-icon id="pause" @click=${e => this.onTapPause(e)} ?hidden=${!this.playing}>pause</mwc-icon>
+          <mwc-icon id="right" @click=${e => this.onTapRight(e)}>keyboard_arrow_right</mwc-icon>
+          <mwc-icon id="down" @click=${e => this.onTapDown(e)}>keyboard_arrow_down</mwc-icon>
+          <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
+            >fullscreen</mwc-icon
+          >
+          <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
+            >fullscreen_exit</mwc-icon
+          >
+        </div>
+
+        <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
+          sec.
+        <select .value=${this.rows} @change=${e => (this.rows = e.target.value)}>
+          ${[1, 2, 3, 4, 5].map(
+            row => html`
+              <option>${row}</option>
+            `
+          )}
+        </select>
+        x
+        <select .value=${this.columns} @change=${e => (this.columns = e.target.value)}>
+          ${[1, 2, 3, 4, 5].map(
+            column => html`
+              <option>${column}</option>
+            `
+          )}
+        </select>
       </div>
     `
   }
@@ -243,10 +210,6 @@ class BoardPlayer extends LitElement {
   onTapDown(e) {
     this.currentPlayer.axis = 'x'
     this.currentPlayer.previous()
-  }
-
-  onTapSettings(e) {
-    console.warn('Not implemented yet.')
   }
 
   async restart() {

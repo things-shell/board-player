@@ -34,6 +34,7 @@ export const style = css`
     bottom: 15px;
     transform: translateX(-50%);
 
+    padding: 10px;
     background-color: #cc3300;
   }
 
@@ -41,7 +42,7 @@ export const style = css`
     display: none;
   }
 
-  #control > * {
+  #control > div > * {
     cursor: pointer;
   }
 
