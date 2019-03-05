@@ -41,6 +41,10 @@ export const style = css`
     display: none;
   }
 
+  #control > * {
+    cursor: pointer;
+  }
+
   [hidden] {
     display: none;
   }
