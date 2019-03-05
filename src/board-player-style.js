@@ -47,6 +47,10 @@ export const style = css`
     cursor: pointer;
   }
 
+  #control > input {
+    width: 30px;
+  }
+
   [hidden] {
     display: none;
   }

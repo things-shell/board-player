@@ -82,6 +82,7 @@ class BoardPlayer extends LitElement {
           >
         </div>
 
+        <mwc-icon @click=${e => this.onTapDown(e)}>update</mwc-icon>
         <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
           sec.
         <select .value=${this.rows} @change=${e => (this.rows = e.target.value)}>
