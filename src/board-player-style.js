@@ -29,9 +29,10 @@ export const style = css`
 
   #control {
     position: absolute;
-    width: 100%;
-    display: block;
+    left: 50%;
     bottom: 15px;
+
+    background-color: #cc3300;
   }
 
   #control[hidden] {
