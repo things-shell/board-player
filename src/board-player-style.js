@@ -35,6 +35,7 @@ export const style = css`
     transform: translateX(-50%);
 
     padding: 10px;
+    color: white;
     background-color: #cc3300;
   }
 
