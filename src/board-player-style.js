@@ -27,13 +27,18 @@ export const style = css`
     background: black;
   }
 
-  #fab {
+  #control {
     position: absolute;
-    right: 15px;
+    width: 100%;
+    display: block;
     bottom: 15px;
   }
 
-  #fab[hidden] {
+  #control[hidden] {
+    display: none;
+  }
+
+  [hidden] {
     display: none;
   }
 `

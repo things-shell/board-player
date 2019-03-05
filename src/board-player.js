@@ -12,7 +12,7 @@ import './player/board-player-flipcard-edge'
 import './player/board-player-grid'
 import './player/board-player-enlarge-grid'
 
-import { fullscreen } from '@things-shell/client-utils'
+import { togglefullscreen } from '@things-shell/client-utils'
 
 import { style } from './board-player-style'
 
@@ -27,6 +27,7 @@ class BoardPlayer extends LitElement {
     this.columns = 1
     this.rows = 1
     this.started = false
+    this.fullscreened = false
   }
 
   static get properties() {
@@ -38,7 +39,9 @@ class BoardPlayer extends LitElement {
       columns: Number,
       rows: Number,
       provider: Object,
-      started: Boolean
+      started: Boolean,
+      playing: Boolean,
+      fullscreened: Boolean
     }
   }
 
@@ -48,13 +51,7 @@ class BoardPlayer extends LitElement {
 
   render() {
     return html`
-      <slot
-        @keydown=${e => this._onKeydown(e)}
-        @click=${e => this._onTap(e)}
-        @mousemove=${e => this._onMousemove(e)}
-        @transform=${e => this._onTransform(e)}
-        tabindex="-1"
-      >
+      <slot @mousemove=${e => this.onMousemove(e)} @transform=${e => this.onTransform(e)} tabindex="-1">
         ${this.started
           ? html`
               ${this.transition == 'flip-card'
@@ -121,14 +118,21 @@ class BoardPlayer extends LitElement {
           : html``}
       </slot>
 
-      <mwc-fab
-        id="fab"
-        @mouseover=${e => this._onMouseoverFab(e)}
-        @click=${e => this._onTapFullscreen(e)}
-        icon="fullscreen"
-        title="fullscreen"
-      >
-      </mwc-fab>
+      <div id="control" @mouseover=${e => this.onMouseoverControl(e)} hidden>
+        <mwc-icon id="up" @click=${e => this.onTapUp(e)}>keyboard_arrow_up</mwc-icon>
+        <mwc-icon id="left" @click=${e => this.onTapLeft(e)}>keyboard_arrow_left</mwc-icon>
+        <mwc-icon id="play" @click=${e => this.onTapPlay(e)} ?hidden=${this.playing}>play_arrow</mwc-icon>
+        <mwc-icon id="pause" @click=${e => this.onTapPause(e)} ?hidden=${!this.playing}>pause</mwc-icon>
+        <mwc-icon id="right" @click=${e => this.onTapRight(e)}>keyboard_arrow_right</mwc-icon>
+        <mwc-icon id="down" @click=${e => this.onTapDown(e)}>keyboard_arrow_down</mwc-icon>
+        <mwc-icon id="settings" @click=${e => this.onTapSettings(e)}>settings</mwc-icon>
+        <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
+          >fullscreen</mwc-icon
+        >
+        <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
+          >fullscreen_exit</mwc-icon
+        >
+      </div>
     `
   }
 
@@ -138,13 +142,17 @@ class BoardPlayer extends LitElement {
     }
   }
 
-  get fab() {
-    return this.shadowRoot.getElementById('fab')
+  get control() {
+    return this.shadowRoot.getElementById('control')
+  }
+
+  get fullscreen() {
+    return this.shadowRoot.getElementById('fullscreen')
   }
 
   async _resetFadeTimer(stop) {
-    if (!this._fab_animation) {
-      this._fab_animation = this.fab.animate(
+    if (!this._control_animation) {
+      this._control_animation = this.control.animate(
         [
           {
             opacity: 1,
@@ -156,48 +164,24 @@ class BoardPlayer extends LitElement {
       )
     }
 
-    this.fab.hidden = false
+    this.control.hidden = false
 
-    this._fab_animation.cancel()
+    this._control_animation.cancel()
     if (stop) return
 
     try {
-      this._fab_animation.play()
-      await this._fab_animation.finished
-      this.fab.hidden = true
+      this._control_animation.play()
+      await this._control_animation.finished
+      this.control.hidden = true
     } catch (e) {
       /* cancelled */
     }
   }
 
-  _onMousemove() {
-    this._resetFadeTimer()
-  }
-
-  _onMouseoverFab() {
-    this._resetFadeTimer(true)
-  }
-
-  _onTapFullscreen() {
-    fullscreen(
-      this.currentPlayer,
-      () => {
-        this.fab.hidden = true
-        this.focus()
-      },
-      () => {
-        this.fab.hidden = false
-        this.focus()
-      }
-    )
-  }
-
-  _onTransform() {
-    requestAnimationFrame(() => this.started && this._resetTransformTimer())
-  }
-
   _resetTransformTimer() {
     clearTimeout(this._transfer_timer)
+
+    this.playing = true
 
     if (this.currentPlayer) {
       this._transfer_timer = setTimeout(() => {
@@ -206,33 +190,63 @@ class BoardPlayer extends LitElement {
     }
   }
 
-  _onTap() {
-    this.currentPlayer && this.currentPlayer.next()
+  onMousemove() {
+    this._resetFadeTimer()
   }
 
-  _onKeydown(e) {
-    var player = this.currentPlayer
+  onMouseoverControl() {
+    this._resetFadeTimer(true)
+  }
 
-    if (!player) return
+  onTapFullscreen() {
+    togglefullscreen(
+      this,
+      () => {
+        this.fullscreened = true
+        this.focus()
+      },
+      () => {
+        this.fullscreened = false
+        this.focus()
+      }
+    )
+  }
 
-    switch (e.keyCode) {
-      case 38: // arrow up
-        player.axis = 'x'
-        player.next()
-        break
-      case 39: // arrow right
-        player.axis = 'y'
-        player.next()
-        break
-      case 40: // arrow down
-        player.axis = 'x'
-        player.previous()
-        break
-      case 37: // arrow left
-        player.axis = 'y'
-        player.previous()
-        break
-    }
+  onTransform() {
+    requestAnimationFrame(() => this.started && this.playing && this._resetTransformTimer())
+  }
+
+  onTapPlay(e) {
+    this._resetTransformTimer()
+  }
+
+  onTapPause(e) {
+    clearTimeout(this._transfer_timer)
+    this.playing = false
+  }
+
+  onTapLeft(e) {
+    this.currentPlayer.axis = 'y'
+    this.currentPlayer.previous()
+  }
+
+  onTapRight(e) {
+    this.currentPlayer.axis = 'y'
+    this.currentPlayer.next()
+  }
+
+  onTapUp(e) {
+    this.currentPlayer.axis = 'x'
+    this.currentPlayer.next()
+  }
+
+  onTapDown(e) {
+    this.currentPlayer.axis = 'x'
+    this.currentPlayer.previous()
+  }
+
+  onTapSettings(e) {
+    console.warn('Not implemented yet.')
   }
 
   async restart() {
@@ -244,6 +258,7 @@ class BoardPlayer extends LitElement {
     if (!this.boards || this.boards.length == 0) return
 
     this.started = true
+    this.playing = true
 
     await this.renderComplete
     this.currentPlayer = this.shadowRoot.querySelector(':not([style*="display: none"])[player]')
