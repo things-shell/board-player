@@ -35,10 +35,12 @@ export const style = css`
     transform: translateX(-55%);
 
     color: white;
-    background-color: rgba(0,0,0,.7);
-    border-radius:12px;
-    padding:7px 10px 7px 35px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 7px 10px 7px 35px;
     box-shadow: 0 0 5px #000;
+
+    min-width: 310px;
   }
 
   #control[hidden] {
@@ -48,88 +50,111 @@ export const style = css`
   #control > div > * {
     cursor: pointer;
   }
-  .joystick{
-    position:absolute;
-    left:-50px;bottom:-15px;
-    border-radius:50%;
-    overflow:hidden;
-    width:80px;height:80px;
-    float:left;
-    border:2px solid tomato;
-    background-color:#c34827;
+
+  #joystick {
+    position: absolute;
+    left: -50px;
+    bottom: -15px;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    float: left;
+    border: 2px solid tomato;
+    background-color: #c34827;
     box-shadow: 0 0 5px #000;
   }
-  .joystick mwc-icon{
-    position:absolute;
-    display:block;
-    width:20px;height:20px;
-    font-size:25px;
-    line-height:.7;
+
+  #joystick mwc-icon {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    font-size: 25px;
+    line-height: 0.7;
   }
-  mwc-icon#up{
-    left:29px;
+
+  mwc-icon#up {
+    left: 29px;
   }
-  mwc-icon#left{
-    top:32px;left:-2px;
+
+  mwc-icon#left {
+    top: 32px;
+    left: -2px;
   }
-  mwc-icon#play,mwc-icon#pause{
-    left:20px;top:20px;
-    width:40px;height:40px;
-    border:1px solid rgba(0,0,0,.15);
-    border-radius:50%;
-    background-color:rgba(0,0,0,.15);
-    font-size:45px;
-    line-height:.9;
+
+  mwc-icon#play,
+  mwc-icon#pause {
+    left: 20px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.15);
+    font-size: 45px;
+    line-height: 0.9;
   }
-  mwc-icon#right{
-    top:31px;left:60px;
+
+  mwc-icon#right {
+    top: 31px;
+    left: 60px;
   }
-  mwc-icon#down{
-    left:29px;top:63px;
+
+  mwc-icon#down {
+    left: 29px;
+    top: 63px;
   }
-  mwc-icon#pause{
-    text-indent:-2px;
+
+  mwc-icon#pause {
+    text-indent: -2px;
   }
-  .setting{
-    float:right;
-    font-size:12px;
+
+  .setting {
+    float: left;
+    font-size: 12px;
   }
+
   .setting mwc-icon {
-    position:relative;
-    top:5px;
-    margin-left:10px;
-    font-size:22px;
-    color:rgba(255,174,53,.8);
-    cursor:default !important;
+    position: relative;
+    top: 5px;
+    margin-left: 10px;
+    font-size: 22px;
+    color: rgba(255, 174, 53, 0.8);
+    cursor: default !important;
   }
-  .setting input{
-    width:50px;
-    font-size:14px;
-    background-color:transparent;
-    border:none;
-    border-bottom:1px solid #fff;
-    color:#fff;
-    text-align:right;
+
+  .setting input {
+    width: 50px;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    text-align: right;
   }
-  .setting select{
-    border:none;
-    font-size:14px;
+
+  .setting select {
+    border: none;
+    font-size: 14px;
   }
-  .setting input:focus{
+
+  .setting input:focus {
     outline: none;
   }
 
-  .etc{
-    float:right;
-    position:relative;
-    top:3px;
-    margin-left:15px;
-  }
-  .etc mwc-icon{
-    font-size:30px;
+  .etc {
+    float: left;
+    position: relative;
+    top: 3px;
+    margin-left: 15px;
   }
 
-  [hidden] {
+  .etc mwc-icon {
+    font-size: 30px;
+  }
+
+  #control [hidden] {
     display: none;
   }
 `
