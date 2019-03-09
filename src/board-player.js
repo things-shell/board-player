@@ -76,7 +76,7 @@ class BoardPlayer extends LitElement {
           <mwc-icon id="down" @click=${e => this.onTapDown(e)}>keyboard_arrow_down</mwc-icon>
         </div>  
 
-        <div class="setting">
+        <div id="setting">
           <mwc-icon id="schedule">schedule</mwc-icon>
           <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
             sec.
@@ -98,13 +98,11 @@ class BoardPlayer extends LitElement {
           </select>
         </div>
 
-        <div class="etc">
+        <div id="etc">
           <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
-              >fullscreen</mwc-icon
-            >
+          >fullscreen</mwc-icon>
           <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
-              >fullscreen_exit</mwc-icon
-            >
+          >fullscreen_exit</mwc-icon>
           <mwc-icon id="close" @click=${e => this.onTapClose(e)}>close</mwc-icon>
         </div>        
       </div>

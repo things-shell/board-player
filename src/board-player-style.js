@@ -110,12 +110,12 @@ export const style = css`
     text-indent: -2px;
   }
 
-  .setting {
+  #setting {
     float: left;
     font-size: 12px;
   }
 
-  .setting mwc-icon {
+  #setting mwc-icon {
     position: relative;
     top: 5px;
     margin-left: 10px;
@@ -124,7 +124,7 @@ export const style = css`
     cursor: default !important;
   }
 
-  .setting input {
+  #setting input {
     width: 50px;
     font-size: 14px;
     background-color: transparent;
@@ -134,23 +134,23 @@ export const style = css`
     text-align: right;
   }
 
-  .setting select {
+  #setting select {
     border: none;
     font-size: 14px;
   }
 
-  .setting input:focus {
+  #setting input:focus {
     outline: none;
   }
 
-  .etc {
+  #etc {
     float: left;
     position: relative;
     top: 3px;
     margin-left: 15px;
   }
 
-  .etc mwc-icon {
+  #etc mwc-icon {
     font-size: 30px;
   }
 
