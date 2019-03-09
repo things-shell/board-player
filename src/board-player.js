@@ -67,39 +67,46 @@ class BoardPlayer extends LitElement {
       </slot>
 
       <div id="control" @mouseover=${e => this.onMouseoverControl(e)} hidden>
-        <div>
+        <div class="joystick">
           <mwc-icon id="up" @click=${e => this.onTapUp(e)}>keyboard_arrow_up</mwc-icon>
           <mwc-icon id="left" @click=${e => this.onTapLeft(e)}>keyboard_arrow_left</mwc-icon>
           <mwc-icon id="play" @click=${e => this.onTapPlay(e)} ?hidden=${this.playing}>play_arrow</mwc-icon>
           <mwc-icon id="pause" @click=${e => this.onTapPause(e)} ?hidden=${!this.playing}>pause</mwc-icon>
           <mwc-icon id="right" @click=${e => this.onTapRight(e)}>keyboard_arrow_right</mwc-icon>
           <mwc-icon id="down" @click=${e => this.onTapDown(e)}>keyboard_arrow_down</mwc-icon>
-          <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
-            >fullscreen</mwc-icon
-          >
-          <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
-            >fullscreen_exit</mwc-icon
-          >
-        </div>
+        </div>  
 
-        <mwc-icon @click=${e => this.onTapDown(e)}>update</mwc-icon>
-        <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
-          sec.
-        <select .value=${this.rows} @change=${e => (this.rows = e.target.value)}>
-          ${[1, 2, 3, 4, 5].map(
-            row => html`
-              <option>${row}</option>
-            `
-          )}
-        </select>
-        x
-        <select .value=${this.columns} @change=${e => (this.columns = e.target.value)}>
-          ${[1, 2, 3, 4, 5].map(
-            column => html`
-              <option>${column}</option>
-            `
-          )}
-        </select>
+        <div class="etc">
+          <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
+              >fullscreen</mwc-icon
+            >
+          <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
+              >fullscreen_exit</mwc-icon
+            >
+          <mwc-icon id="close" @click=${e => this.onTapDown(e)}>close</mwc-icon>
+        </div>
+        
+        <div class="setting">
+          <mwc-icon id="schedule">schedule</mwc-icon>
+          <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
+              sec.
+              <mwc-icon id="view_module">view_module</mwc-icon>            
+              <select .value=${this.rows} @change=${e => (this.rows = e.target.value)}>
+              ${[1, 2, 3, 4, 5].map(
+                row => html`
+                  <option>${row}</option>
+                `
+              )}
+            </select>
+            x
+            <select .value=${this.columns} @change=${e => (this.columns = e.target.value)}>
+              ${[1, 2, 3, 4, 5].map(
+                column => html`
+                  <option>${column}</option>
+                `
+              )}
+            </select>
+          </div>
       </div>
     `
   }
