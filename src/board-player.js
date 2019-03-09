@@ -7,7 +7,7 @@ import './board-wrapper'
 
 import './player/board-player-carousel'
 
-import { togglefullscreen } from '@things-shell/client-utils'
+import { togglefullscreen, exitfullscreen } from '@things-shell/client-utils'
 
 import { style } from './board-player-style'
 
@@ -105,7 +105,7 @@ class BoardPlayer extends LitElement {
           <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
               >fullscreen_exit</mwc-icon
             >
-          <mwc-icon id="close" @click=${e => this.onTapDown(e)}>close</mwc-icon>
+          <mwc-icon id="close" @click=${e => this.onTapClose(e)}>close</mwc-icon>
         </div>        
       </div>
     `
@@ -218,6 +218,14 @@ class BoardPlayer extends LitElement {
   onTapDown(e) {
     this.currentPlayer.axis = 'x'
     this.currentPlayer.previous()
+  }
+
+  onTapClose(e) {
+    if (this.fullscreened) {
+      exitfullscreen()
+    }
+
+    window.history.back()
   }
 
   async restart() {
