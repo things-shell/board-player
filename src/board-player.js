@@ -112,6 +112,8 @@ class BoardPlayer extends LitElement {
   updated(changes) {
     if (changes.has('boards') || changes.has('columns') || changes.has('rows')) {
       this.boards && this.boards.length > 0 ? this.restart() : this.stop()
+    } else if (changes.has('playtime') && this.playing) {
+      this._resetTransformTimer()
     }
   }
 
