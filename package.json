@@ -1,6 +1,6 @@
 {
   "name": "@things-shell/board-player",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "src/index.js",
   "repository": "https://github.com/things-shell/board-player.git",
   "author": "Hearty Oh <heartyoh@hatiolab.com>",
@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@hatiolab/things-scene": "^2.5.18",
-    "@material/mwc-button": "^0.4.0",
-    "@material/mwc-fab": "^0.4.0",
-    "@material/mwc-icon": "^0.3.6",
+    "@material/mwc-button": "^0.5.0",
+    "@material/mwc-fab": "^0.5.0",
+    "@material/mwc-icon": "^0.5.0",
     "@polymer/polymer": "^3.2.0",
     "@things-shell/client-utils": "^0.3.0",
     "lit-element": "^2.1.0"
