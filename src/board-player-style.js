@@ -11,6 +11,10 @@ export const style = css`
     overflow: hidden;
   }
 
+  :slotted(*) {
+    border: none;
+  }
+
   ::slotted > * {
     flex: 1;
   }
@@ -18,6 +22,7 @@ export const style = css`
   board-wrapper {
     width: 100%;
     height: 100%;
+    position: relative;
   }
 
   board-wrapper[front] {

@@ -34,6 +34,13 @@ class BoardWrapper extends LitElement {
       css`
         :host {
           display: block;
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
+        #target {
+          display: block;
           width: 100%;
           height: 100%;
         }
@@ -43,6 +50,7 @@ class BoardWrapper extends LitElement {
 
   render() {
     return html`
+      <div id="target"></div>
       <slot></slot>
     `
   }
@@ -61,6 +69,10 @@ class BoardWrapper extends LitElement {
         }
       })
     })
+  }
+
+  get targetEl() {
+    return this.shadowRoot.getElementById('target')
   }
 
   disconnectedCallback() {
@@ -91,7 +103,7 @@ class BoardWrapper extends LitElement {
     this.provider.get(this.sceneId, true).then(
       scene => {
         this.scene = scene
-        this.scene.target = this
+        this.scene.target = this.targetEl
 
         /* 이 컴포넌트의 폭이 값을 가지고 있으면 - 화면상에 자리를 잡고 보여지고 있음을 의미한다.
          * 이 때는 정상적으로 그려주고,
