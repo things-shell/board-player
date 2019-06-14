@@ -34,7 +34,8 @@ class BoardPlayer extends LitElement {
       provider: Object,
       started: Boolean,
       playing: Boolean,
-      fullscreened: Boolean
+      fullscreened: Boolean,
+      fitMode: String
     }
   }
 
@@ -57,7 +58,8 @@ class BoardPlayer extends LitElement {
                 >
                   ${this.boards.map(
                     item => html`
-                      <board-wrapper page .sceneId=${item.id} fit="both" .provider=${this.provider}> </board-wrapper>
+                      <board-wrapper page .sceneId=${item.id} .fit=${this.fitMode} .provider=${this.provider}>
+                      </board-wrapper>
                     `
                   )}
                 </board-player-carousel>

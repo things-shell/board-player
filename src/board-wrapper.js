@@ -83,6 +83,7 @@ class BoardWrapper extends LitElement {
 
   updated(change) {
     change.has('sceneId') && this._onSceneIdChanged(this.sceneId)
+    change.has('fit') && this.scene && this.scene.fit(this.fit)
   }
 
   _releaseRef() {
