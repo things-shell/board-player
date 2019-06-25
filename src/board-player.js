@@ -72,35 +72,41 @@ class BoardPlayer extends LitElement {
           <mwc-icon id="down" @click=${e => this.onTapDown(e)}>keyboard_arrow_down</mwc-icon>
         </div>  
 
-        <div id="setting">
-          <mwc-icon id="schedule">schedule</mwc-icon>
-          <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
-            sec.
-          <mwc-icon id="view_module">view_module</mwc-icon>            
-          <select .value=${this.rows} @change=${e => (this.rows = e.target.value)}>
-            ${[1, 2, 3, 4, 5].map(
-              row => html`
-                <option>${row}</option>
-              `
-            )}
-          </select>
-          x
-          <select .value=${this.columns} @change=${e => (this.columns = e.target.value)}>
-            ${[1, 2, 3, 4, 5].map(
-              column => html`
-                <option>${column}</option>
-              `
-            )}
-          </select>
-        </div>
+        <div id="setting-container">
+          <div id="setting">
+            <div id="schedule-container">
+              <mwc-icon id="schedule">schedule</mwc-icon>
+              <input .value=${this.playtime} @change=${e => (this.playtime = e.target.value)}></input>
+                sec.
+            </div>
+            <div id="grid-setting-container">
+              <mwc-icon id="view_module">view_module</mwc-icon>            
+              <select .value=${this.rows} @change=${e => (this.rows = e.target.value)}>
+                ${[1, 2, 3, 4, 5].map(
+                  row => html`
+                    <option>${row}</option>
+                  `
+                )}
+              </select>
+              x
+              <select .value=${this.columns} @change=${e => (this.columns = e.target.value)}>
+                ${[1, 2, 3, 4, 5].map(
+                  column => html`
+                    <option>${column}</option>
+                  `
+                )}
+              </select>
+            </div>
+          </div>
 
-        <div id="etc">
-          <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
-          >fullscreen</mwc-icon>
-          <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
-          >fullscreen_exit</mwc-icon>
-          <mwc-icon id="close" @click=${e => this.onTapClose(e)}>close</mwc-icon>
-        </div>        
+          <div id="etc">
+            <mwc-icon id="fullscreen" @click=${e => this.onTapFullscreen(e)} ?hidden=${this.fullscreened}
+            >fullscreen</mwc-icon>
+            <mwc-icon id="fullscreen-exit" @click=${e => this.onTapFullscreen(e)} ?hidden=${!this.fullscreened}
+            >fullscreen_exit</mwc-icon>
+            <mwc-icon id="close" @click=${e => this.onTapClose(e)}>close</mwc-icon>
+          </div>     
+        </div>   
       </div>
     `
   }
