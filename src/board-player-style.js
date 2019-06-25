@@ -136,16 +136,13 @@ export const style = css`
   }
 
   #setting mwc-icon {
-    position: relative;
-    top: 5px;
-    margin-left: 10px;
     font-size: 22px;
     color: rgba(255, 174, 53, 0.8);
-    cursor: default !important;
   }
 
   #setting input {
     width: 50px;
+    margin-right: 5px;
     font-size: 14px;
     background-color: transparent;
     border: none;
@@ -161,6 +158,12 @@ export const style = css`
 
   #setting input:focus {
     outline: none;
+  }
+
+  #grid-setting-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   #etc {
