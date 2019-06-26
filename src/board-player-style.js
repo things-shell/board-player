@@ -120,19 +120,22 @@ export const style = css`
   #setting-container {
     grid-column: 2 / span 2;
     grid-row: 2;
+    gap: 0 10px;
     border-radius: 12px;
     background: rgba(0, 0, 0, 0.7);
     height: 100%;
     box-shadow: rgb(0, 0, 0) 0px 0px 5px;
     display: grid;
-    grid-template-columns: 1fr 84px;
+    grid-template-columns: 1fr 60px;
     align-items: center;
     padding-left: 60px;
+    padding-right: 5px;
   }
 
   #setting {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 0 10px;
   }
 
   #setting mwc-icon {
@@ -160,6 +163,12 @@ export const style = css`
     outline: none;
   }
 
+  #schedule-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   #grid-setting-container {
     display: flex;
     align-items: center;
@@ -170,6 +179,7 @@ export const style = css`
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    justify-items: center;
   }
 
   #etc mwc-icon {
