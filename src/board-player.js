@@ -52,7 +52,7 @@ class BoardPlayer extends LitElement {
                 <board-player-carousel axis="y" .rows=${this.rows} .columns=${this.columns} player>
                   ${this.boards.map(
                     item => html`
-                      <board-wrapper page .sceneId=${item.id} .fit=${this.fitMode} .provider=${this.provider}>
+                      <board-wrapper page .sceneId=${item.id} fit='both' .provider=${this.provider}>
                       </board-wrapper>
                     `
                   )}
